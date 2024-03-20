@@ -33,10 +33,10 @@ app.use("/api", mainApiRoute);
 app.use(notFound);
 app.use(errorHandler);
 
-db.then(() => {
+// db.then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
   });
-}).catch((err) => {
-  console.log(err);
-});
+// }).catch((err) => {
+  // console.log(err);
+// });

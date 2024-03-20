@@ -1,4 +1,8 @@
-module.exports.beginner = [
+const xlsx = require("xlsx");
+
+// __________________________________________________________________
+
+var beginner = [
   {
     value: {
       ar: "ما هو الهدف الرئيسي لمندوب المبيعات؟",
@@ -1197,3 +1201,42 @@ module.exports.beginner = [
     ],
   },
 ];
+
+const workbookAr = xlsx.readFile("./constans/AR_data_with_answers.xlsx");
+const workbookEn = xlsx.readFile("./constans/EN_data_with_answers.xlsx");
+
+// Access Worksheet
+const worksheetAr = workbookAr.Sheets[workbookAr.SheetNames[0]];
+const worksheetEn = workbookEn.Sheets[workbookEn.SheetNames[0]];
+
+// Convert Worksheet to JSON
+const dataAr = xlsx.utils.sheet_to_json(worksheetAr);
+const dataEn = xlsx.utils.sheet_to_json(worksheetEn);
+
+dataAr.forEach((row, i, arr) => {
+  beginner[i].value = { ar: dataAr[i]["questions"], en: `` };
+  for (let j = 0; j < 3; j++) {
+    if (!!beginner[i]?.wrong_answers[j]?.ar) {
+      beginner[i].wrong_answers[j].ar = dataAr[i]["answer " + (j + 1)];
+    } else {
+      beginner[i].wrong_answers[j] = { ar: dataAr[i]["answer " + (j + 1)], en: `` };
+    }
+  }
+});
+dataEn.forEach((row, i, arr) => {
+  beginner[i].value.en = dataEn[i]["questions"];
+
+  for (let j = 0; j < 3; j++) {
+    if (!!beginner[i]?.wrong_answers[j]?.en) {
+      beginner[i].wrong_answers[j].en = dataEn[i]["answer " + (j + 1)];
+    } else {
+      beginner[i].wrong_answers[j] = {
+        ar: beginner[i].wrong_answers[j]?.ar,
+        en: dataEn[i]["answer " + (j + 1)],
+      };
+    }
+  }
+});
+
+console.log(beginner);
+module.exports.beginner = beginner;
