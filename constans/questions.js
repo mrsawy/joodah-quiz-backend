@@ -1215,28 +1215,42 @@ const dataEn = xlsx.utils.sheet_to_json(worksheetEn);
 
 dataAr.forEach((row, i, arr) => {
   beginner[i].value = { ar: dataAr[i]["questions"], en: `` };
-  for (let j = 0; j < 3; j++) {
-    if (!!beginner[i]?.wrong_answers[j]?.ar) {
-      beginner[i].wrong_answers[j].ar = dataAr[i]["answer " + (j + 1)];
-    } else {
-      beginner[i].wrong_answers[j] = { ar: dataAr[i]["answer " + (j + 1)], en: `` };
+  beginner[i].correct_answer = { ar: dataAr[i]["correct answer"], en: `` };
+  for (let j = 0; j < 4; j++) {
+    if (dataAr[i]["answer " + (j + 1)]) {
+      if (!!beginner[i]?.wrong_answers[j]?.ar) {
+        beginner[i].wrong_answers[j].ar = dataAr[i]["answer " + (j + 1)];
+      } else {
+        beginner[i].wrong_answers[j] = { ar: dataAr[i]["answer " + (j + 1)], en: `` };
+      }
     }
   }
 });
 dataEn.forEach((row, i, arr) => {
   beginner[i].value.en = dataEn[i]["questions"];
-
-  for (let j = 0; j < 3; j++) {
-    if (!!beginner[i]?.wrong_answers[j]?.en) {
-      beginner[i].wrong_answers[j].en = dataEn[i]["answer " + (j + 1)];
-    } else {
-      beginner[i].wrong_answers[j] = {
-        ar: beginner[i].wrong_answers[j]?.ar,
-        en: dataEn[i]["answer " + (j + 1)],
-      };
+  beginner[i].correct_answer.en = dataEn[i]["correct answer"];
+  for (let j = 0; j < 4; j++) {
+    if (dataEn[i]["answer " + (j + 1)]) {
+      if (!!beginner[i]?.wrong_answers[j]?.en) {
+        beginner[i].wrong_answers[j].en = dataEn[i]["answer " + (j + 1)];
+      } else {
+        beginner[i].wrong_answers[j] = {
+          ar: beginner[i].wrong_answers[j]?.ar,
+          en: dataEn[i]["answer " + (j + 1)],
+        };
+      }
     }
   }
 });
 
-console.log(beginner);
+beginner.forEach((ele) => {
+  ele.wrong_answers.forEach((e) => {
+    if(!e?.en){
+      console.log(e.en);
+      console.log(ele);
+
+    }
+  });
+});
+// console.log();
 module.exports.beginner = beginner;
