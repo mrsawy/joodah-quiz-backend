@@ -14,8 +14,10 @@ module.exports = async (req, res, next) => {
   // Assuming you have a function to verify the token and get user details
   const user = await verifyTokenAndGetUser(authorization.split(` `)[1], id);
   if (!user) {
+    console.log({ message: "Access denied. Not an admin." });
     return res.status(403).json({ message: "Access denied. Not an admin." });
   }
+  console.log({ user });
 
   // User is admin, proceed to the next middleware or route handler
   next();
@@ -24,7 +26,7 @@ module.exports = async (req, res, next) => {
 const verifyTokenAndGetUser = async (token, id) => {
   try {
     // Verify the JWT token using your secret key
-    console.log(SECRET_KEY, token);
+    // console.log(SECRET_KEY, token);
 
     if (id) {
       let foundedAdmin = await Admin.findById(id);

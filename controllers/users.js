@@ -1,4 +1,5 @@
 const yup = require("yup");
+const axios = require("axios");
 
 const User = require(`./../models/User`);
 
@@ -45,23 +46,54 @@ module.exports = {
           .string()
           .max(60, "education cannot exceed 60 character")
           .required("education is required"),
+        capatcha: yup.string().required("capatcha is required"),
       });
-      let { email, age, phone, name, experience, education } = userFormData;
-      let valid = validationSchema.validateSync({ email, age, phone, name, experience, education });
+      let { email, age, phone, name, experience, education, capatcha } = userFormData;
 
-      console.log(`userFormData =->>`, userFormData);
+      let valid = validationSchema.validateSync({
+        email,
+        age,
+        phone,
+        name,
+        experience,
+        education,
+        capatcha,
+      });
+      let response = await axios.get(
+        `https://recaptcha.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${capatcha}`
+      );
+
+      if (!response.data.success) {
+        throw new Error(`capatcha is not valid`);
+      }
+
+      let existingUser = await User.findOne({ $or: [{ email }, { phone }] });
+      if (existingUser) {
+        return res.status(403).json({ error: "User with the same email or phone already exists" });
+      }
+
       let user = await User.create(userFormData);
-
-      return res.status(200).json(user);
+      return res.status(200).json({
+        user: {
+          name: user?.name,
+          email: user?.email,
+          phone: user?.phone,
+          age: user?.age,
+          experience: user?.experience,
+          education: user?.education,
+        },
+      });
     } catch (e) {
       if (Array.isArray(e?.errors) && e?.errors?.length > 0) {
         return res.status(400).json({ errors: e?.errors });
-        return;
+      } else {
+        return res.status(400).json({ error: e, massage: `Error while Creating the user` });
       }
     }
   },
   getAllUsers: async (req, res) => {
     let users = await User.find().sort({ createdAt: -1 });
+    console.log(users);
     res.json(users);
   },
   getOneUser: async (req, res) => {

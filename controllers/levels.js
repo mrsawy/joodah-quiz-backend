@@ -6,7 +6,7 @@ module.exports = {
   createLevel: async (req, res) => {
     try {
       let { levels } = req?.body;
-      console.log(levels);
+      // console.log(levels);
       const allLevels = [];
 
       for (const level of levels) {
