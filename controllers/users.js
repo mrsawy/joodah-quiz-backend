@@ -5,9 +5,15 @@ const User = require(`./../models/User`);
 
 module.exports = {
   check: async (req, res) => {
-    let { email, phone } = req.body;
-    // console.log(phone)
-    let user = await User.findOne({ $or: [{ email }, { phone }] });
+    let { email, phone, category } = req.body;
+    // console.log({ email, phone, category });
+    // let _user = await User.findOne({ $or: [{ email }, { phone }] });
+    // if (_user) {
+    //   console.log(_user.result.levelId);
+    // }
+    let user = await User.findOne({
+      $and: [{ $or: [{ email }, { phone }] }, { "result.levelId": category }],
+    });
     if (user) {
       return res.status(403).json({ error: "User with the same email or phone already exists" });
     } else {
@@ -84,6 +90,7 @@ module.exports = {
         },
       });
     } catch (e) {
+      console.log(e);
       if (Array.isArray(e?.errors) && e?.errors?.length > 0) {
         return res.status(400).json({ errors: e?.errors });
       } else {
