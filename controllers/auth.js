@@ -1,4 +1,4 @@
-const Admin = require(`./../models/Admin`);
+const Admin = require(`./../mode  ls/Admin`);
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -29,8 +29,12 @@ module.exports = {
     const { email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const admin = await Admin.create({ email, password: hashedPassword });
+    //
+    let createdAdmin = await Admin.findOne({ email, password: hashedPassword });
+
     // await admin.save();
-    console.log(admin);
+    console.log(createdAdmin);
+    //
     const token = jwt.sign({ id: admin._id, email }, SECRET_KEY);
     res.status(201).json({ token, id: admin._id });
   },
