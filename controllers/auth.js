@@ -23,13 +23,14 @@ module.exports = {
 
     const token = jwt.sign({ id: admin._id, email }, SECRET_KEY);
     res.json({ token, id: admin._id });
-    console.log(`Login Done ##`)
+    console.log(`Login Done ##`);
   },
   signUp: async (req, res) => {
     const { email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const admin = new Admin({ email, password: hashedPassword });
-    await admin.save();
+    const admin = await Admin.create({ email, password: hashedPassword });
+    // await admin.save();
+    console.log(admin);
     const token = jwt.sign({ id: admin._id, email }, SECRET_KEY);
     res.status(201).json({ token, id: admin._id });
   },
