@@ -25,6 +25,8 @@ const AdminSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    collection: 'admin' // Specify the desired collection name
+
   }
 );
 

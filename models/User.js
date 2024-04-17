@@ -55,6 +55,8 @@ const UserSchema = new mongoose.Schema(
   },
   {
     timestamps: true, // Automatically add createdAt and updatedAt timestamps
+    collection: 'users' // Specify the desired collection name
+
   }
 );
 
