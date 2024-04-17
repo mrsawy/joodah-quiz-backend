@@ -12,17 +12,18 @@ module.exports = {
     // console.log(admin)
 
     if (!admin) {
-      return res.status(401).json({ error: "Invalid username or password" });
+      return res.status(401).json({ error: "Invalid Email" });
     }
 
     const isPasswordValid = await bcrypt.compare(password, admin.password);
 
     if (!isPasswordValid) {
-      return res.status(401).json({ error: "Invalid username or password" });
+      return res.status(401).json({ error: "Invalid  password" });
     }
 
     const token = jwt.sign({ id: admin._id, email }, SECRET_KEY);
     res.json({ token, id: admin._id });
+    console.log(`Login Done ##`)
   },
   signUp: async (req, res) => {
     const { email, password } = req.body;
