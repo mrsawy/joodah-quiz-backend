@@ -108,14 +108,14 @@ module.exports = {
       existingLevel.questions = [];
     }
     //
-    const objId = ObjectId.createFromTime(questionId);
+    // const objId = ObjectId.createFromTime(questionId);
     console.log(`questionId ==>`, questionId);
-    console.log(`objId ==>`, objId);
-    console.log(`objId.tostring ==>`, objId.toString());
+    // console.log(`objId ==>`, objId);
+    // console.log(`objId.tostring ==>`, objId.toString());
     existingLevel.questions = existingLevel.questions.map((q) => {
-      console.log(q._id.toString());
+      // console.log(q._id.toString());
 
-      if (q._id.toString() == objId.toString()) {
+      if (q._id.toString() == questionId) {
         console.log(`same QUESTION`);
         return newQuestion;
       }
