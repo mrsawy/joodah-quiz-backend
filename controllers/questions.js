@@ -113,9 +113,9 @@ module.exports = {
     // console.log(`objId ==>`, objId);
     // console.log(`objId.tostring ==>`, objId.toString());
     existingLevel.questions = existingLevel.questions.map((q) => {
-      // console.log(q._id.toString());
+      console.log(q._id.toString(), `${questionId}`, q._id.toString() == `${questionId}`);
 
-      if (q._id.toString() == questionId) {
+      if (q._id.toString() == `${questionId}`) {
         console.log(`same QUESTION`);
         return newQuestion;
       }
