@@ -108,12 +108,12 @@ module.exports = {
       existingLevel.questions = [];
     }
 
+    const objId = new ObjectId(questionId);
+    console.log(objId);
     existingLevel.questions = existingLevel.questions.map((q) => {
-      // console.log(q);
-      const objId = new ObjectId(questionId);
 
       if (q._id.equals(objId)) {
-        // console.log(`same QUESSion`)
+        console.log(`same QUESSion`)
         return newQuestion;
       }
       return q;
