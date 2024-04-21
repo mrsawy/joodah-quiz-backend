@@ -109,6 +109,7 @@ module.exports = {
     }
     //
     const objId = ObjectId.createFromTime(questionId);
+    console.log(`questionId ==>`, questionId);
     console.log(`objId ==>`, objId);
     console.log(`objId.tostring ==>`, objId.toString());
     existingLevel.questions = existingLevel.questions.map((q) => {
