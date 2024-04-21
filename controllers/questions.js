@@ -96,7 +96,8 @@ module.exports = {
       ].filter((e) => e.ar && e.en),
     };
 
-    // console.log(req.body);
+    console.log(req.body);
+    console.log(`newQuestion  ==>` ,newQuestion);
 
     const existingLevel = await Level.findById(levelId);
     if (!existingLevel) {
