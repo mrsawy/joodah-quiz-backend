@@ -97,7 +97,7 @@ module.exports = {
     };
 
     console.log(req.body);
-    console.log(`newQuestion  ==>` ,newQuestion);
+    console.log(`newQuestion  ==>`, newQuestion);
 
     const existingLevel = await Level.findById(levelId);
     if (!existingLevel) {
@@ -107,18 +107,19 @@ module.exports = {
     if (!existingLevel.questions) {
       existingLevel.questions = [];
     }
-
-    const objId = new ObjectId(questionId);
+    // 
+    const objId = ObjectId.createFromTime(questionId);
     console.log(objId);
     existingLevel.questions = existingLevel.questions.map((q) => {
+      console.log(q._id);
 
       if (q._id.equals(objId)) {
-        console.log(`same QUESSion`)
+        console.log(`same QUESTION`);
         return newQuestion;
       }
       return q;
     });
-
+    // 
     await existingLevel.save();
 
     const level = await Level.find();
