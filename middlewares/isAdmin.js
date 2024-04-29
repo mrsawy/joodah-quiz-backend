@@ -38,7 +38,7 @@ const verifyTokenAndGetUser = async (token, id) => {
     }
     const decoded = jwt.verify(token, SECRET_KEY);
 
-    console.log(decoded);
+    console.log(`decodedF==>` ,decoded);
 
     let foundedAdmin = await Admin.findById(decoded.id);
     if (foundedAdmin) {

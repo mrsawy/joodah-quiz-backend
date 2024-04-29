@@ -77,8 +77,10 @@ module.exports = {
       if (existingUser) {
         return res.status(403).json({ error: "User with the same email or phone already exists" });
       }
-
+// ______________________________________________
       let user = await User.create(userFormData);
+// __________________________________________________
+
       return res.status(200).json({
         user: {
           name: user?.name,
