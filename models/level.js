@@ -10,6 +10,11 @@ const LevelSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
+  disable_ar: {
+    type: Boolean,
+    defaultValue: false,
+  },
   name_ar: {
     type: String,
     required: true,

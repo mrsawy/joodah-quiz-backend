@@ -2,6 +2,7 @@ const express = require("express");
 var cors = require("cors");
 var path = require("path");
 require("dotenv").config();
+require("colors");
 
 const mainApiRoute = require("./routes/index");
 //
@@ -20,7 +21,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/api", mainApiRoute);
-app.use(`/uploads`,express.static(path.join(__dirname, "uploads")));
+app.use(`/uploads`, express.static(path.join(__dirname, "uploads")));
 // app.get(`/uploads`, (req, res) => {
 //   res.sendFile(path.join(__dirname, "front-build", "index.html"));
 // });
@@ -33,11 +34,13 @@ app.get(`*`, (req, res) => {
 
 app.use(notFound);
 app.use(errorHandler);
-
+console.log(`App started`.yellow.bold);
 db.then(() => {
+  console.log(`Data base connected`.green.bold);
+
   app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
+    console.log(`Server is running at http://localhost:${PORT}`.white.bgGreen);
   });
 }).catch((err) => {
   console.log(err);
-})
+});

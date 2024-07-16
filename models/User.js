@@ -52,11 +52,25 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       defaultValue: 0,
     },
+    nationality: String,
+    gender: { type: mongoose.Schema.Types.Mixed },
+    academicSpecialization: String,
+    countryOfResidence: String,
+    relatedExperience: Number,
+    // questionsAndAnswers: [],
+    // totalQuestions: Number,
+    // correctAnswers: Number,
+    // timeTaken: Number,
+    // levelId: { type: mongoose.Types.ObjectId },
+    // levelName: String,
+    // fullTime: {
+    //   type: Number,
+    //   required: false,
+    // },
   },
   {
     timestamps: true, // Automatically add createdAt and updatedAt timestamps
-    collection: 'users' // Specify the desired collection name
-
+    collection: "users", // Specify the desired collection name
   }
 );
 

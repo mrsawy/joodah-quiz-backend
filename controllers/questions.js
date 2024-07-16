@@ -3,7 +3,7 @@ const { ObjectId } = require("mongodb");
 const formatQuestion = require("../utils/formatQuestion.js");
 const formatQuestions = require("../utils/formatQuestions.js");
 const Level = require(`./../models/level.js`);
-const { beginner } = require(`./../constans/questions`);
+const data = require(`./../constans/questions`);
 
 module.exports = {
   addQuestion: async (req, res) => {
@@ -25,7 +25,7 @@ module.exports = {
     }
   },
   setQuestions: async (req, res) => {
-    const { levelId, questionsArr } = req.body;
+    const { levelId } = req.body;
     try {
       const existingLevel = await Level.findById(levelId);
       if (!existingLevel) {
@@ -35,7 +35,7 @@ module.exports = {
         existingLevel.questions = [];
       }
       // let questions = formatQuestions(questionsArr);
-      existingLevel.questions = beginner;
+      existingLevel.questions = data;
       // JSON.stringify();
       existingLevel.save();
       res.status(200).json({ questions: existingLevel?.questions });

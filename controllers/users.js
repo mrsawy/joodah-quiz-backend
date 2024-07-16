@@ -2,6 +2,7 @@ const yup = require("yup");
 const axios = require("axios");
 
 const User = require(`./../models/User`);
+const { validationSchema } = require(`./../validation/index`);
 
 module.exports = {
   check: async (req, res) => {
@@ -35,25 +36,8 @@ module.exports = {
   createUser: async (req, res) => {
     try {
       let { userFormData } = req.body;
-      const validationSchema = yup.object().shape({
-        email: yup.string().email("Invalid email").required("Email is required"),
-        phone: yup
-          .string()
-          .required("Phone is required")
-          .min(12, "Phone must be at least 11 numbers")
-          .max(14, "Phone cannot exceed 13 number"),
-        name: yup.string().max(20, "name cannot exceed 20 character").required("Name is required"),
-        age: yup.number().max(80, "age cannot exceed 80").required("age is required"),
-        experience: yup
-          .string()
-          .max(5, "experience cannot exceed 5 character")
-          .required("experience is required"),
-        education: yup
-          .string()
-          .max(60, "education cannot exceed 60 character")
-          .required("education is required"),
-        capatcha: yup.string().required("capatcha is required"),
-      });
+      console.log({ userFormData });
+
       let { email, age, phone, name, experience, education, capatcha } = userFormData;
 
       let valid = validationSchema.validateSync({
@@ -77,9 +61,9 @@ module.exports = {
       if (existingUser) {
         return res.status(403).json({ error: "User with the same email or phone already exists" });
       }
-// ______________________________________________
+      // ______________________________________________
       let user = await User.create(userFormData);
-// __________________________________________________
+      // __________________________________________________
 
       return res.status(200).json({
         user: {
@@ -89,6 +73,11 @@ module.exports = {
           age: user?.age,
           experience: user?.experience,
           education: user?.education,
+          nationality: user?.nationality,
+          gender: user?.gender,
+          academicSpecialization: user?.academicSpecialization,
+          countryOfResidence: user?.countryOfResidence,
+          relatedExperience: user?.relatedExperience,
         },
       });
     } catch (e) {
