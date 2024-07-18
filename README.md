@@ -14,7 +14,6 @@
 - **Historical Data and Trend Analysis**: Performance tracking over time.
 - **Predictive Analytics and Recommendations**: Insights based on quiz data.
 - **Personalized Consultancy Services**: System optimization guidance.
-- **Real-time Location Tracking and Geofencing**: For user management.
 
 ### Backend
 
@@ -39,4 +38,3 @@
 - **Manual Grading**: Allows for manual grading of quiz responses.
 - **User Can Pause Exam**: Users have the ability to pause and resume exams.
 - **Basic Level Management**: Manage different levels and complexities of quizzes.
-- **Basic Notifications**: Essential notifications for important events and updates.
