@@ -31,7 +31,8 @@ app.use(`/uploads`, express.static(path.join(__dirname, "uploads")));
 //   res.sendFile(path.join(__dirname, "front-build", "index.html"));
 // });
 app.use(express.static(path.join(__dirname, "front-build")));
-app.use(express.static(path.join(__dirname, "front-convince")));
+// app.use(express.static(path.join(__dirname, "front-convince")));
+
 app.get(`*`, (req, res) => {
   const fullUrl = req.protocol + "://" + req.hostname + req.originalUrl;
   if (fullUrl.contains(`convince`)) {
