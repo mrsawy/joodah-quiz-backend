@@ -20,10 +20,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(`*`, (req, res, next) => {
-  const fullUrl = req.protocol + "://" + req.get("host") + req.originalUrl;
-  console.log({ fullUrl });
-});
+
 
 app.use("/api", mainApiRoute);
 app.use(`/uploads`, express.static(path.join(__dirname, "uploads")));
@@ -33,6 +30,7 @@ app.use(`/uploads`, express.static(path.join(__dirname, "uploads")));
 
 app.get(`*`, (req, res) => {
   const fullUrl = req.protocol + "://" + req.hostname + req.originalUrl;
+  console.log({fullUrl})
   if (fullUrl.includes(`convince`)) {
     app.use(express.static(path.join(__dirname, "front-convince")));
     res.sendFile(path.join(__dirname, "front-convince", "index.html"));
