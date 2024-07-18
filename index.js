@@ -28,14 +28,14 @@ app.use(`/uploads`, express.static(path.join(__dirname, "uploads")));
 //   res.sendFile(path.join(__dirname, "front-build", "index.html"));
 // });
 
+app.use(express.static(path.join(__dirname, "front-convince")));
+app.use(express.static(path.join(__dirname, "front-build")));
 app.get(`*`, (req, res) => {
   const fullUrl = req.protocol + "://" + req.hostname + req.originalUrl;
   console.log({fullUrl})
   if (fullUrl.includes(`convince`)) {
-    app.use(express.static(path.join(__dirname, "front-convince")));
     res.sendFile(path.join(__dirname, "front-convince", "index.html"));
   } else if (fullUrl.includes(`dashboard`)) {
-    app.use(express.static(path.join(__dirname, "front-build")));
     res.sendFile(path.join(__dirname, "front-build", "index.html"));
   } else {
     next();
