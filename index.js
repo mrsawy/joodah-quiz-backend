@@ -20,14 +20,30 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(`*`, (req, res, next) => {
+  const fullUrl = req.protocol + "://" + req.get("host") + req.originalUrl;
+  console.log({ fullUrl });
+});
+
 app.use("/api", mainApiRoute);
 app.use(`/uploads`, express.static(path.join(__dirname, "uploads")));
 // app.get(`/uploads`, (req, res) => {
 //   res.sendFile(path.join(__dirname, "front-build", "index.html"));
 // });
 app.use(express.static(path.join(__dirname, "front-build")));
+app.use(express.static(path.join(__dirname, "front-convince")));
 app.get(`*`, (req, res) => {
+  const fullUrl = req.protocol + "://" + req.get("host") + req.originalUrl;
+if(fullUrl.contains(`convince`)){
+  res.sendFile(path.join(__dirname, "front-convince", "index.html"));
+
+}else if (fullUrl.contains(`dashboard`)){
   res.sendFile(path.join(__dirname, "front-build", "index.html"));
+
+}
+else {
+  next()
+}
 });
 
 // });
