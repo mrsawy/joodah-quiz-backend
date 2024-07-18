@@ -61,7 +61,7 @@ dataAr.forEach((d, i) => {
   });
 });
 
-console.log(`result`, { result });
+// console.log(`result`, { result });
 
 // console.log(result.map((e) => e.wrong_answers));
 module.exports = result;
