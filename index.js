@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "front-convince")));
 app.use(express.static(path.join(__dirname, "front-convince")));
 app.use(express.static(path.join(__dirname, "front-build")));
+app.use(express.static(path.join(__dirname, "convincestatic")));
 
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
