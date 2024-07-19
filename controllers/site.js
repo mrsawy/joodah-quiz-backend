@@ -25,6 +25,7 @@ module.exports = {
   },
   setSiteUploads: async (req, res) => {
     const { fileName } = req.params;
+    console.log({ fileName });
     uploadFunction.single(fileName)(req, res, (err) => {
       if (err) {
         // throw new Error(err);
