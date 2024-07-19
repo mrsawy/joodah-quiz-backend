@@ -14,6 +14,9 @@ const { PORT = 3000 } = process.env;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "front-convince")));
+app.use(express.static(path.join(__dirname, "front-convince")));
+app.use(express.static(path.join(__dirname, "front-build")));
 
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
@@ -26,13 +29,10 @@ app.use(`/uploads`, express.static(path.join(__dirname, "uploads")));
 //   res.sendFile(path.join(__dirname, "front-build", "index.html"));
 // });
 // convince-quiz
-app.use(express.static(path.join(__dirname, "front-convince")));
-app.use(`/convince-quiz`, (req, res) => {
+app.get(`/convince-quiz`, (req, res) => {
   res.sendFile(path.join(__dirname, "convince-quiz", "index.html"));
 });
 // ____________________
-app.use(express.static(path.join(__dirname, "front-convince")));
-app.use(express.static(path.join(__dirname, "front-build")));
 app.get(`*`, (req, res) => {
   const fullUrl = req.protocol + "://" + req.hostname + req.originalUrl;
   console.log({ fullUrl });
