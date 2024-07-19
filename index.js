@@ -20,19 +20,22 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
 app.use("/api", mainApiRoute);
 app.use(`/uploads`, express.static(path.join(__dirname, "uploads")));
 // app.get(`/uploads`, (req, res) => {
 //   res.sendFile(path.join(__dirname, "front-build", "index.html"));
 // });
-
+// convince-quiz
+app.use(express.static(path.join(__dirname, "front-convince")));
+app.use(`/convince-quiz`, (req, res) => {
+  res.sendFile(path.join(__dirname, "convince-quiz", "index.html"));
+});
+// ____________________
 app.use(express.static(path.join(__dirname, "front-convince")));
 app.use(express.static(path.join(__dirname, "front-build")));
 app.get(`*`, (req, res) => {
   const fullUrl = req.protocol + "://" + req.hostname + req.originalUrl;
-  console.log({fullUrl})
+  console.log({ fullUrl });
   if (fullUrl.includes(`convince`)) {
     res.sendFile(path.join(__dirname, "front-convince", "index.html"));
   } else if (fullUrl.includes(`dashboard`)) {
