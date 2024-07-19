@@ -33,17 +33,17 @@ app.get(`/convince-quiz`, (req, res) => {
   res.sendFile(path.join(__dirname, "convince-quiz", "index.html"));
 });
 // ____________________
-app.get(`*`, (req, res) => {
-  const fullUrl = req.protocol + "://" + req.hostname + req.originalUrl;
-  console.log({ fullUrl });
-  if (fullUrl.includes(`convince`)) {
-    res.sendFile(path.join(__dirname, "front-convince", "index.html"));
-  } else if (fullUrl.includes(`dashboard`)) {
-    res.sendFile(path.join(__dirname, "front-build", "index.html"));
-  } else {
-    next();
-  }
-});
+// app.get(`*`, (req, res) => {
+//   const fullUrl = req.protocol + "://" + req.hostname + req.originalUrl;
+//   console.log({ fullUrl });
+//   if (fullUrl.includes(`convince`)) {
+//     res.sendFile(path.join(__dirname, "front-convince", "index.html"));
+//   } else if (fullUrl.includes(`dashboard`)) {
+//     res.sendFile(path.join(__dirname, "front-build", "index.html"));
+//   } else {
+//     next();
+//   }
+// });
 
 // });
 
