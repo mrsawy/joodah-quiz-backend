@@ -14,37 +14,49 @@ const { PORT = 3000 } = process.env;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "front-convince")));
-app.use(express.static(path.join(__dirname, "front-convince")));
-app.use(express.static(path.join(__dirname, "front-build")));
-app.use(express.static(path.join(__dirname, "convincestatic")));
 
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
   next();
 });
+// app.use(express.static(path.join(__dirname, "convince-test-static")));
+app.use(`/constatic`, express.static(path.join(__dirname, "constatic")));
+app.use(`/uploads`, express.static(path.join(__dirname, "uploads")));
+app.get(`/uploads`, (req, res) => {
+  res.sendFile(path.join(__dirname, "front-build", "index.html"));
+});
+// app.use(express.static(path.join(__dirname, "front-convince")));
+// app.use(express.static(path.join(__dirname, "front-convince")));
+// app.use(express.static(path.join(__dirname, "front-build")));
+// app.use(express.static(path.join(__dirname, "convincestatic")));
 
 app.use("/api", mainApiRoute);
-app.use(`/uploads`, express.static(path.join(__dirname, "uploads")));
-// app.get(`/uploads`, (req, res) => {
+// convince-quiz
+// app.get(`/convince-quiz`, (req, res) => {
+//   app.use(express.static(path.join(__dirname, "convince-quiz")));
+//   res.sendFile(path.join(__dirname, "convince-quiz", "index.html"));
+// });
+app.use(express.static(path.join(__dirname, "convince-test")));
+app.get(`/convince-test`, (req, res) => {
+  res.sendFile(path.join(__dirname, "convince-test", "index.html"));
+});
+
+// app.use(express.static(path.join(__dirname, "front-build")));
+// app.get(`/front-build`, (req, res) => {
 //   res.sendFile(path.join(__dirname, "front-build", "index.html"));
 // });
-// convince-quiz
-app.get(`/convince-quiz`, (req, res) => {
-  res.sendFile(path.join(__dirname, "convince-quiz", "index.html"));
-});
 // ____________________
-// app.get(`*`, (req, res) => {
-//   const fullUrl = req.protocol + "://" + req.hostname + req.originalUrl;
-//   console.log({ fullUrl });
-//   if (fullUrl.includes(`convince`)) {
-//     res.sendFile(path.join(__dirname, "front-convince", "index.html"));
-//   } else if (fullUrl.includes(`dashboard`)) {
-//     res.sendFile(path.join(__dirname, "front-build", "index.html"));
-//   } else {
-//     next();
-//   }
-// });
+app.get(`*`, (req, res, next) => {
+  const fullUrl = req.protocol + "://" + req.hostname + req.originalUrl;
+  console.log({ fullUrl });
+  if (fullUrl.includes(`convince`)) {
+    res.sendFile(path.join(__dirname, "front-convince", "index.html"));
+  } else if (fullUrl.includes(`dashboard`)) {
+    res.sendFile(path.join(__dirname, "front-build", "index.html"));
+  } else {
+    next();
+  }
+});
 
 // });
 
