@@ -19,47 +19,24 @@ app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
   next();
 });
-// app.use(express.static(path.join(__dirname, "convince-test-static")));
 
-app.use(express.static(path.join(__dirname, "front-convince")));
-app.use(express.static(path.join(__dirname, "front-build")));
-// /
-app.use(`/constatic`, express.static(path.join(__dirname, "constatic")));
-app.use(`/uploads`, express.static(path.join(__dirname, "uploads")));
+app.use(`/static`, express.static(path.join(__dirname, "static")));
 
+//
 app.get(`/uploads`, (req, res) => {
   res.sendFile(path.join(__dirname, "front-build", "index.html"));
 });
-// app.use(express.static(path.join(__dirname, "front-convince")));
-// app.use(express.static(path.join(__dirname, "convincestatic")));
-
 app.use("/api", mainApiRoute);
-// convince-quiz
-// app.get(`/convince-quiz`, (req, res) => {
-//   app.use(express.static(path.join(__dirname, "convince-quiz")));
-//   res.sendFile(path.join(__dirname, "convince-quiz", "index.html"));
-// });
-app.use(express.static(path.join(__dirname, "convince-test")));
+
 app.get(`/convince-test`, (req, res) => {
   res.sendFile(path.join(__dirname, "convince-test", "index.html"));
 });
 
-// app.use(express.static(path.join(__dirname, "front-build")));
-// app.get(`/front-build`, (req, res) => {
-//   res.sendFile(path.join(__dirname, "front-build", "index.html"));
-// });
 // ____________________
 
-app.get(`*`, (req, res, next) => {
-  const fullUrl = req.protocol + "://" + req.hostname + req.originalUrl;
-  console.log({ fullUrl });
-  if (fullUrl.includes(`convince`)) {
-    res.sendFile(path.join(__dirname, "front-convince", "index.html"));
-  } else if (fullUrl.includes(`dashboard`)) {
-    res.sendFile(path.join(__dirname, "front-build", "index.html"));
-  } else {
-    next();
-  }
+app.get(`/dashboard`, (req, res, next) => {
+  express.static(path.join(__dirname, "front-convince"))(req, res, () => {});
+  res.sendFile(path.join(__dirname, "front-convince", "index.html"));
 });
 
 // });
