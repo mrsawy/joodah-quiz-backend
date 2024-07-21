@@ -52,8 +52,8 @@ const LevelSchema = new mongoose.Schema({
         },
         wrong_answers: [
           {
-            ar: { type: String, required: true },
-            en: { type: String, required: true },
+            ar: { type: String, required: false },
+            en: { type: String, required: false },
           },
         ],
       },
