@@ -21,11 +21,12 @@ app.use((req, res, next) => {
 });
 
 app.use(`/static`, express.static(path.join(__dirname, "static")));
+app.use(`/uploads`, express.static(path.join(__dirname, "uploads")));
 
 //
-app.get(`/uploads`, (req, res) => {
-  res.sendFile(path.join(__dirname, "front-build", "index.html"));
-});
+// app.get(`/uploads`, (req, res) => {
+//   res.sendFile(path.join(__dirname, "front-build", "index.html"));
+// });
 app.use("/api", mainApiRoute);
 
 app.get(`/convince-test`, (req, res) => {
@@ -34,8 +35,7 @@ app.get(`/convince-test`, (req, res) => {
 
 // ____________________
 
-app.get(`/dashboard`, (req, res, next) => {
-  // express.static(path.join(__dirname, "front-convince"))(req, res, () => {});
+app.get(`/dashboard/*`, (req, res, next) => {
   res.sendFile(path.join(__dirname, "front-convince", "index.html"));
 });
 
