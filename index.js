@@ -34,7 +34,9 @@ app.get(`/convince-test`, (req, res) => {
 });
 
 // ____________________
-
+app.get(`/dashboard`, (req, res, next) => {
+  res.sendFile(path.join(__dirname, "front-convince", "index.html"));
+});
 app.get(`/dashboard/*`, (req, res, next) => {
   res.sendFile(path.join(__dirname, "front-convince", "index.html"));
 });

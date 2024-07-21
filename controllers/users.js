@@ -7,7 +7,7 @@ const { validationSchema } = require(`./../validation/index`);
 module.exports = {
   check: async (req, res) => {
     let { email, phone, category } = req.body;
-    // console.log({ email, phone, category });
+    console.log({ email, phone, category });
     // let _user = await User.findOne({ $or: [{ email }, { phone }] });
     // if (_user) {
     //   console.log(_user.result.levelId);
