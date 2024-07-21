@@ -20,14 +20,17 @@ app.use((req, res, next) => {
   next();
 });
 // app.use(express.static(path.join(__dirname, "convince-test-static")));
+
+app.use(express.static(path.join(__dirname, "front-convince")));
+app.use(express.static(path.join(__dirname, "front-build")));
+// /
 app.use(`/constatic`, express.static(path.join(__dirname, "constatic")));
 app.use(`/uploads`, express.static(path.join(__dirname, "uploads")));
+
 app.get(`/uploads`, (req, res) => {
   res.sendFile(path.join(__dirname, "front-build", "index.html"));
 });
 // app.use(express.static(path.join(__dirname, "front-convince")));
-// app.use(express.static(path.join(__dirname, "front-convince")));
-// app.use(express.static(path.join(__dirname, "front-build")));
 // app.use(express.static(path.join(__dirname, "convincestatic")));
 
 app.use("/api", mainApiRoute);
@@ -46,6 +49,7 @@ app.get(`/convince-test`, (req, res) => {
 //   res.sendFile(path.join(__dirname, "front-build", "index.html"));
 // });
 // ____________________
+
 app.get(`*`, (req, res, next) => {
   const fullUrl = req.protocol + "://" + req.hostname + req.originalUrl;
   console.log({ fullUrl });
