@@ -36,7 +36,7 @@ app.use("/api", mainApiRoute);
 app.get(`/quiz`, (req, res) => {
   res.sendFile(path.join(__dirname, "quiz-front", "index.html"));
 });
-app.get(`/dashboard`, (req, res) => {
+app.get(['/dashboard', '/dashboard/*'], (req, res) => {
   res.sendFile(path.join(__dirname, "dashboard-front", "index.html"));
 });
 
