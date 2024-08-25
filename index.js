@@ -29,11 +29,15 @@ app.use(`/uploads`, express.static(path.join(__dirname, "uploads")));
 // });
 app.use("/api", mainApiRoute);
 
-app.get(`/convince-test`, (req, res) => {
-  res.sendFile(path.join(__dirname, "convince-test", "index.html"));
+// app.get(`/convince-test`, (req, res) => {
+//   res.sendFile(path.join(__dirname, "convince-test", "index.html"));
+// });
+
+app.get(`/quiz`, (req, res) => {
+  res.sendFile(path.join(__dirname, "quiz-front", "index.html"));
 });
-app.get(`*`, (req, res) => {
-  res.sendFile(path.join(__dirname, "front-build", "index.html"));
+app.get(`/dashboard`, (req, res) => {
+  res.sendFile(path.join(__dirname, "dashboard-front", "index.html"));
 });
 
 // ____________________
