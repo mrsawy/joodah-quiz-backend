@@ -36,11 +36,14 @@ module.exports = {
       }
       // let questions = formatQuestions(questionsArr);
       existingLevel.questions = data;
-      // JSON.stringify();
+      JSON.stringify();
       existingLevel.save();
-      res.status(200).json({ questions: existingLevel?.questions });
+      console.log(`data ==>`, data);
+      res.status(200).json("Done");
     } catch (e) {
       console.log(e);
+      res.status(404)
+
     }
   },
   deleteQuestion: async (req, res) => {
@@ -66,7 +69,7 @@ module.exports = {
     }
     res.status(200).json(existingLevel?.questions ? existingLevel?.questions : []);
   },
-  getOneQuestion: async (req, res) => {},
+  getOneQuestion: async (req, res) => { },
   editOneQuestion: async (req, res) => {
     const {
       levelId,
