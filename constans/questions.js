@@ -1,12 +1,12 @@
 const xlsx = require("xlsx");
 
 // Read Excel files
-const fileExcel = xlsx.readFile("./constans/hr.xlsx");
-const fileExcelAr = xlsx.readFile("./constans/hr.xlsx");
+const fileExcel = xlsx.readFile("./constans/web.xlsx");
+// const fileExcelAr = xlsx.readFile("./constans/web.xlsx");
 
 // Access Worksheets
 const worksheet = fileExcel.Sheets[fileExcel.SheetNames[0]];
-const worksheetAr = fileExcelAr.Sheets[fileExcelAr.SheetNames[0]];
+// const worksheetAr = fileExcelAr.Sheets[fileExcelAr.SheetNames[0]];
 
 // Convert Worksheets to JSON
 const data = xlsx.utils.sheet_to_json(worksheet);
@@ -31,12 +31,17 @@ const result = [];
 
 // Combine data from both languages
 data.forEach((d, i) => {
-  console.log(d);
+  if (!d.question || !d["correct answer"]) {
+    console.warn(`Skipping question ${i} due to missing data`, d);
+    return;
+  }
+  // console.log(i, d);
   result[i] = {
     value: { ar: d.question, en: d.question },
     correct_answer: {
       ar: d["correct answer"],
       en: d["correct answer"],
+
     },
     wrong_answers: Object.entries(d)
       .filter((e) => e[0] !== "question" && e[0] !== "correct answer")
@@ -45,6 +50,7 @@ data.forEach((d, i) => {
         en: ele[1] == d["correct answer"] || !ele[1] ? `` : ele[1],
       })),
   };
+
 });
 
 // dataAr.forEach((d, i) => {
@@ -79,7 +85,7 @@ data.forEach((d, i) => {
 //   { corr: result.map((r) => r.correct_answer).map((cr) => cr.ar) }
 // );
 
-console.log({ result })
+// console.log(result )
 
 
 module.exports = result;
