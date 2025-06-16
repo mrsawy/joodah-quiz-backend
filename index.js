@@ -47,7 +47,7 @@ app.get(['/dashboard', '/dashboard/*'], (req, res) => {
 // app.get(`/dashboard/*`, (req, res, next) => {
 //   res.sendFile(path.join(__dirname, "front-convince", "index.html"));
 // });
-
+//
 // });
 
 app.use(notFound);
