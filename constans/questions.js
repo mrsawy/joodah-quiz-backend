@@ -85,7 +85,7 @@ dataAr.forEach((d, i) => {
 //   { corr: result.map((r) => r.correct_answer).map((cr) => cr.ar) }
 // );
 
-console.log(result )
+// console.log(result )
 
 
 module.exports = result;
