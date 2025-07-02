@@ -4,9 +4,17 @@
 //     API_URL: "http://localhost:4000/api",   
 // };
 
+// window._env_ = {
+//     BASE_URL: "https://web.hadefah.com",
+//     UPLOADS_URL: "https://web.hadefah.com/uploads/",
+//     API_URL: "https://web.hadefah.com/api",   
+// };
+
+
+
 window._env_ = {
-    BASE_URL: "https://web.hadefah.com",
-    UPLOADS_URL: "https://web.hadefah.com/uploads/",
-    API_URL: "https://web.hadefah.com/api",   
+    BASE_URL: "https://hrquiz.hadefah.com",
+    UPLOADS_URL: "https://hrquiz.hadefah.com/uploads/",
+    API_URL: "https://hrquiz.hadefah.com/api",   
 };
 
