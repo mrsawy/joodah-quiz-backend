@@ -13,8 +13,8 @@
 
 
 window._env_ = {
-    BASE_URL: "https://web.hadefah.com",
-    UPLOADS_URL: "https://web.hadefah.com/uploads/",
-    API_URL: "https://web.hadefah.com/api",   
+    BASE_URL: "https://sales.hadefah.com",
+    UPLOADS_URL: "https://sales.hadefah.com/uploads/",
+    API_URL: "https://sales.hadefah.com/api",   
 };
 
